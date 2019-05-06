@@ -155,7 +155,7 @@
     function run() {
         // 注入输入框，按钮等
         let div = document.createElement("div");
-        let divStr = '<div id="gta_jobs_filter_container" style="right:10px;bottom:20px;z-index: 9999;position: fixed;width: 200px;height: 200px;border:4px;">' +
+        let divStr = '<div id="gta_jobs_filter_container" style="right:10px;bottom:20px;z-index: 9999;position: fixed;width: 200px;height: 200px;border:4px; background:#aaaaaa;color:red;">' +
             'gta jobs fliter<br>' +
             '过滤好评率：<input id="gta_filter_rating_min" value="0.1" style="width: 40px"/> - <input id="gta_filter_rating_max" value="0.35" style="width: 40px"/><br>' +
             '过滤游玩数：<input id="gta_filter_play" value="0" style="width: 80px"/> <br>' +
