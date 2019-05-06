@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  Hide likes more than a certain proportion of the figure
 // @author       alvin
-// @match        https://zh.socialclub.rockstargames.com/jobs*
+// @match        https://*.socialclub.rockstargames.com/jobs*
 // @grant        none
 // @require      http://code.jquery.com/jquery-2.1.1.min.js
 // ==/UserScript==
