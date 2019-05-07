@@ -186,7 +186,7 @@
             '过滤已收藏：<input type="checkbox" id="gta_filter_collected"/> <br>' +
             '过滤已玩过：<input type="checkbox" id="gta_filter_played"/> <br>' +
             '过滤毛子图：<input type="checkbox" id="gta_filter_russian"/> <br>' +
-            '<button id="gta_filter_button">关</button>'
+            '当前状态：<button id="gta_filter_button">关</button>'
         '</div>';
         div.innerHTML = divStr;
         $('body').append(div);
