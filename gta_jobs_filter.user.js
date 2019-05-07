@@ -137,7 +137,7 @@
             '过滤已收藏：<input type="checkbox" id="gta_filter_collected"/> <br>' +
             '过滤已玩过：<input type="checkbox" id="gta_filter_played"/> <br>' +
             '过滤毛子图：<input type="checkbox" id="gta_filter_russian"/> <br>' +
-            '当前状态：<button id="gta_filter_button">关</button>'
+            '当前状态：<button id="gta_filter_button" style="border: none;color:white;background-color: #f44336;padding: 6px 14px;border-radius: 4px;text-align: center;text-decoration: none;display: inline-block;" id="gta_filter_button">关</button>'
         '</div>';
         div.innerHTML = divStr;
         $('body').append(div);
@@ -152,12 +152,14 @@
         $('#gta_filter_button').click(function(){
             if ($(this).html() == '关') {
                 $(this).html('开');
+                $('#gta_filter_button').css('background-color', '#4CAF50');
                 $('#gta_filter_rating_min').attr('readonly', true);
                 $('#gta_filter_rating_max').attr('readonly', true);
                 scollWindow(true);      // 开始拉数据并过滤
             } else {
                 scollWindow(false);     // 停止拉数据
                 $(this).html('关');
+                $('#gta_filter_button').css('background-color', '#f44336');
                 $('#gta_filter_rating_min').attr('readonly', false);
                 $('#gta_filter_rating_max').attr('readonly', false);
             }
