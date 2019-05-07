@@ -12,6 +12,8 @@
 (function() {
     'use strict';
 
+    let timer;
+
     // 定时修改隐藏已经修改的
     function updateJobsList(FILTER_MIN, FILTER_MAX, FILTER_PLAY, FILTER_COLLECTED, FILTER_PLAYED, FILTER_RUSSIA)
     {
@@ -31,7 +33,10 @@
             // 统计
             let mark = false;
 
-            if (rate > FILTER_MAX || rate < FILTER_MIN) {           // 过滤好评率
+            if (FILTER_MIN != 0 && rate < FILTER_MIN) {     // 好评率最小值过滤
+                mark = true;
+            }
+            if (FILTER_MAX != 0 && rate > FILTER_MAX) {     // 好评率最大值过滤
                 mark = true;
             }
             if (FILTER_PLAY != 0 && all <= FILTER_PLAY) {    // 过滤至少游玩人数
@@ -75,7 +80,11 @@
             let rate = all != 0 ? (liked / all).toFixed(2) : 0;
 
             let mark = false;
-            if (rate > FILTER_MAX || rate < FILTER_MIN) {           // 过滤好评率
+
+            if (FILTER_MIN != 0 && rate < FILTER_MIN) {     // 好评率最小值过滤
+                mark = true;
+            }
+            if (FILTER_MAX != 0 && rate > FILTER_MAX) {     // 好评率最大值过滤
                 mark = true;
             }
             if (FILTER_PLAY != 0 && all <= FILTER_PLAY) {    // 过滤至少游玩人数
@@ -117,6 +126,10 @@
         let unit = input.substr(input.length-1,1);
         if (unit == 'k' || unit == 'K') {
             return parseFloat(input.substr(0, input.length-1)) * 1000;
+        } else if (unit == 'm' || unit == 'M') {
+            return parseFloat(input.substr(0, input.length-1)) * 1000000;
+        } else if (unit == 'g' || unit == 'G') {
+            return parseFloat(input.substr(0, input.length-1)) * 1000000000;
         }
         return parseFloat(input);
     }
@@ -135,6 +148,17 @@
             return true;
         }
         return false;
+    }
+
+    // 模拟下拉到最下方
+    function scollWindow(status) {
+        if (status) {
+            timer = setInterval(function() {
+                scroll(0, document.body.scrollHeight);
+            }, 500);
+        } else {
+            clearInterval(timer)
+        }
     }
 
     function jobs()
@@ -157,7 +181,7 @@
         let div = document.createElement("div");
         let divStr = '<div id="gta_jobs_filter_container" style="right:10px;bottom:20px;z-index: 9999;position: fixed;width: 200px;height: 200px;border:4px; background:#aaaaaa;color:red;">' +
             'gta jobs fliter<br>' +
-            '过滤好评率：<input id="gta_filter_rating_min" value="0.1" style="width: 40px"/> - <input id="gta_filter_rating_max" value="0.35" style="width: 40px"/><br>' +
+            '过滤好评率：<input id="gta_filter_rating_min" value="0" style="width: 40px"/> - <input id="gta_filter_rating_max" value="0" style="width: 40px"/><br>' +
             '过滤游玩数：<input id="gta_filter_play" value="0" style="width: 80px"/> <br>' +
             '过滤已收藏：<input type="checkbox" id="gta_filter_collected"/> <br>' +
             '过滤已玩过：<input type="checkbox" id="gta_filter_played"/> <br>' +
@@ -173,7 +197,12 @@
                 $(this).html('开');
                 $('#gta_filter_rating_min').attr('readonly', true);
                 $('#gta_filter_rating_max').attr('readonly', true);
-                $(this).attr('disabled', true);
+                scollWindow(true);
+            } else {
+                $(this).html('关');
+                $('#gta_filter_rating_min').attr('readonly', false);
+                $('#gta_filter_rating_max').attr('readonly', false);
+                scollWindow(false);
             }
         });
 
