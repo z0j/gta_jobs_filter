@@ -2,7 +2,7 @@
 // @name         gta jobs filter
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  Hide likes more than a certain proportion of the figure
+// @description  GTA 差事过滤 简单增强
 // @author       alvin
 // @match        https://*.socialclub.rockstargames.com/jobs*
 // @grant        none
